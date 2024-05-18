@@ -230,7 +230,7 @@ printf "Copying files to respective directories..\n"
 [ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
 [ ! -d ~/.local/share ] && mkdir -p ~/.local/share
 
-for dirs in ~/dotfiles/config/*; do
+for dirs in "$repo_dir"/config/*; do
 	dir_name=$(basename "$dirs")
 	# If the directory is nvim and the user doesn't want to try it, skip this loop
 	if [[ $dir_name == "nvim" && $try_nvim != "y" ]]; then
@@ -246,7 +246,7 @@ for dirs in ~/dotfiles/config/*; do
 done
 
 for folder in applications asciiart fonts startup-page; do
-	if cp -R ~/dotfiles/misc/$folder ~/.local/share/ 2>>RiceError.log; then
+	if cp -R "$repo_dir"/misc/$folder ~/.local/share/ 2>>RiceError.log; then
 		printf "%s%s%s %sfolder copied succesfully!%s\n" "${BLD}" "${CYE}" "$folder" "${CGR}" "${CNC}"
 		sleep 1
 	else
@@ -255,7 +255,7 @@ for folder in applications asciiart fonts startup-page; do
 	fi
 done
 
-if cp -R ~/dotfiles/misc/bin ~/.local/ 2>>RiceError.log; then
+if cp -R "$repo_dir"/misc/bin ~/.local/ 2>>RiceError.log; then
 	printf "%s%sbin %sfolder copied succesfully!%s\n" "${BLD}" "${CYE}" "${CGR}" "${CNC}"
 	sleep 1
 else
@@ -263,7 +263,7 @@ else
 	sleep 1
 fi
 
-if cp -R ~/dotfiles/misc/firefox/* ~/.mozilla/firefox/*.default-release/ 2>>RiceError.log; then
+if cp -R "$repo_dir"/misc/firefox/* ~/.mozilla/firefox/*.default-release/ 2>>RiceError.log; then
 	printf "%s%sFirefox theme %scopied succesfully!%s\n" "${BLD}" "${CYE}" "${CGR}" "${CNC}"
 	sleep 1
 else
@@ -271,8 +271,8 @@ else
 	sleep 1
 fi
 
-if sudo cp ~/dotifles/misc/sddm/sddm.conf /etc/sddm.conf 2>>RiceError.log; then
-	if sudo tar xzf ~/dotfiles/misc/sddm/sugar-candy.tar.gz --directory /usr/share/sddm/themes/ 2>>RiceError.log; then
+if sudo cp "$repo_dir"/misc/sddm/sddm.conf /etc/sddm.conf 2>>RiceError.log; then
+	if sudo tar xzf "$repo_dir"/misc/sddm/sugar-candy.tar.gz --directory /usr/share/sddm/themes/ 2>>RiceError.log; then
 		printf "%s%sSddm sugar candy theme %scopied succesfully!%s\n" "${BLD}" "${CYE}" "${CGR}" "${CNC}"
 		sleep 1
 	else
@@ -286,7 +286,7 @@ fi
 
 sed -i "s/user_pref(\"browser.startup.homepage\", \"file:\/\/\/home\/z0mbi3\/.local\/share\/startup-page\/index.html\")/user_pref(\"browser.startup.homepage\", \"file:\/\/\/home\/$USER\/.local\/share\/startup-page\/index.html\")/" "$HOME"/.mozilla/firefox/*.default-release/user.js
 sed -i "s/name: 'gh0stzk'/name: '$USER'/" "$HOME"/.local/share/startup-page/config.js
-cp -f "$HOME"/dotfiles/home/.zshrc "$HOME"
+cp -f "$repo_dir"/home/.zshrc "$HOME"
 fc-cache -rv >/dev/null 2>&1
 
 if bash $repo_dir/scripts/install_grub_theme.sh 2>>RiceError.log; then
