@@ -39,6 +39,9 @@ shift + alt + {r,v,k}
 shift + alt + p
 	OpenApps --soundcontrol
 
+# clipcat
+super + v
+  clipcat-menu
 
 #|||----- System Keybindings -----|||#
 
