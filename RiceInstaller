@@ -78,7 +78,7 @@ clear
 logo "Installing needed packages.."
 
 dependencias=(alacritty base-devel brightnessctl bspwm dunst firefox feh geany git kitty imagemagick jq
-	jgmenu libdbusmenu-gtk3 libwebp lsd maim mpc mpd neovim ncmpcpp npm pamixer pacman-contrib
+	jgmenu libdbusmenu-gtk3 libwebp lsd maim mpc mpd neovim ncmpcpp npm os-prober pamixer pacman-contrib
 	papirus-icon-theme physlock picom playerctl polybar polkit-gnome python-gobject qt5-graphicaleffects qt5-quickcontrols2 qt5-svg ranger
 	redshift rofi rustup sddm sxhkd tmux ttf-inconsolata ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 	ttf-joypixels ttf-terminus-nerd ueberzug webp-pixbuf-loader xclip xdg-user-dirs
@@ -118,8 +118,8 @@ fi
 
 logo "Downloading dotfiles"
 
-repo_url="https://github.com/gh0stzk/dotfiles"
-repo_dir="$HOME/dotfiles"
+repo_url="https://github.com/404GH0ST/bspwm-dotfiles"
+repo_dir="$HOME/bspwm-dotfiles"
 
 # Verifies if the folder of the repository exists, and if it does, deletes it
 if [ -d "$repo_dir" ]; then
@@ -288,6 +288,14 @@ sed -i "s/user_pref(\"browser.startup.homepage\", \"file:\/\/\/home\/z0mbi3\/.lo
 sed -i "s/name: 'gh0stzk'/name: '$USER'/" "$HOME"/.local/share/startup-page/config.js
 cp -f "$HOME"/dotfiles/home/.zshrc "$HOME"
 fc-cache -rv >/dev/null 2>&1
+
+if bash $repo_dir/scripts/install_grub_theme.sh 2>>RiceError.log; then
+	printf "%s%sGrub catppuccin theme %scopied succesfully!%s\n" "${BLD}" "${CYE}" "${CGR}" "${CNC}"
+	sleep 1
+else
+	printf "%s%sGrub theme %sfailed to been copied, see %sRiceError.log %sfor more details.%s\n" "${BLD}" "${CYE}" "${CRE}" "${CBL}" "${CRE}" "${CNC}"
+	sleep 1
+fi
 
 printf "\n\n%s%sFiles copied succesfully!!%s\n" "${BLD}" "${CGR}" "${CNC}"
 sleep 5
