@@ -48,8 +48,6 @@ expand-or-complete-with-dots() {
 }
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
-bindkey "^[[1;5D" backward-word
-bindkey "^[[1;5C" forward-word
 
 #  ┬ ┬┬┌─┐┌┬┐┌─┐┬─┐┬ ┬
 #  ├─┤│└─┐ │ │ │├┬┘└┬┘
@@ -134,4 +132,7 @@ alias ll='lsd -la --group-directories-first'
 #  ┴ ┴└─┘ ┴ └─┘  └─┘ ┴ ┴ ┴┴└─ ┴ 
 $HOME/.local/bin/colorscript -r
 
+# QoL
 set -o emacs
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
