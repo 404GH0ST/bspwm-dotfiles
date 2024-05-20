@@ -88,6 +88,26 @@ $archlogo: #0f94d2;
 	}
 }
 
+// battery
+.bat{
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 1.2em;
+  padding-right: .5rem;
+  color: $blue;
+}
+
+// brightness
+.brightness-icon{
+  font-size: 1.2rem;
+  margin: .2rem .3rem 0 0;
+  color: $yellow;
+}
+
+.bribar trough highlight {
+  background-color: $yellow;
+  border-radius: 5px;
+}
+
 // icons info
 .control {
   padding: 0.5rem;
